@@ -1,0 +1,10 @@
+apiVersion: awesome.corp.com/v1
+kind: Candy
+metadata:
+  name: chocolate
+  finalizers:
+  - eat-me
+  - drink-me
+spec:
+  flavor: sweeeeeeet
+

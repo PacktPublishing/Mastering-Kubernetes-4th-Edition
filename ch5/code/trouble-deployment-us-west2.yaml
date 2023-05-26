@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: trouble-us-west2
+  labels:
+    app: trouble
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: trouble
+  template:
+    metadata:
+      labels:
+        app: trouble
+        region: us-west2
+    spec:
+      containers:
+      - name: trouble
+        image: nginx
+

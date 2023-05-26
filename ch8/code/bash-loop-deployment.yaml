@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata: 
+  name: bash-loop
+spec: 
+  replicas: 3
+  selector:
+    matchLabels:
+      name: bash-loop
+  template: 
+    metadata: 
+      labels: 
+        name: bash-loop
+    spec: 
+      containers: 
+        - name: bash-loop 
+          image: g1g1/py-kube:0.3
+          resources:
+            requests:
+              cpu: 100m
+          command: ["/bin/bash", "-c", "while true; do sleep 10; done"]

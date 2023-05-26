@@ -1,0 +1,33 @@
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: generic-storage
+provisioner: kubernetes.io/no-provisioner
+reclaimPolicy: Delete
+volumeBindingMode: WaitForFirstConsumer
+---
+kind: Pod
+apiVersion: v1
+metadata:
+  name: the-pod
+spec:
+  containers:
+    - name: the-container
+      image: g1g1/py-kube:0.3
+      volumeMounts:
+        - mountPath: "/data"
+          name: the-volume
+      command: [ "sleep", "1000000" ]
+  volumes:
+    - name: the-volume
+      ephemeral:
+        volumeClaimTemplate:
+          metadata:
+            labels:
+              type: generic-ephemeral-volume
+          spec:
+            accessModes: [ "ReadWriteOnce" ]
+            storageClassName: generic-storage
+            resources:
+              requests:
+                storage: 1Gi

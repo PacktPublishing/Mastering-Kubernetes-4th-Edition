@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: test-labels
+  labels:
+    app: test-labels
+    env: staging
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: test-labels
+      another: label
+  template:
+    metadata:
+      name: test-labels
+      labels:
+        app: test-labels
+        service: test-labels
+        another: label
+    spec:
+      containers:
+      - name: test-labels
+        image: nginx:1.13
+        command: ["bash"]
+        args: ["-c", "echo started...; while true ; do sleep 1 ; done"]

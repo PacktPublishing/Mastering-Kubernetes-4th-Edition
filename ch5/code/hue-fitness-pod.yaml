@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: hue-fitness
+spec:
+  containers:
+  - name: hue-fitness
+    image: busybox
+  initContainers:
+  - name: install
+    image: busybox

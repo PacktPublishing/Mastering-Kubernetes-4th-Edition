@@ -1,0 +1,22 @@
+apiVersion: kyverno.io/v1
+kind: ClusterPolicy
+metadata:
+  name: disallow-some-roles
+spec:
+  background: false
+  validationFailureAction: enforce
+  rules:
+    - name: some-rule
+      match:
+        all:
+          - resources:
+              kinds:
+                - Service
+              names:
+                - "service-1"
+            clusterRoles:
+              - some-cluster-role
+      validate:
+        message: >-
+          cluster roles: "{{ request.clusterRoles }}"
+        deny: {}

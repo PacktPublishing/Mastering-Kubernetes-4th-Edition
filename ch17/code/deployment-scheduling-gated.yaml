@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: some-deployment
+  namespace: trouble
+  labels:
+    app: the-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: the-app
+  template:
+    metadata:
+      name: some-deployment
+      labels:
+        app: the-app
+    spec:
+      schedulingGates:
+        - name: no-schedule-yet
+      containers:
+        - name: pause
+          image: registry.k8s.io/pause:3.8
+

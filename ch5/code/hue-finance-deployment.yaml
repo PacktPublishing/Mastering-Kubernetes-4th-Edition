@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hue-finance
+  labels:
+    app: hue
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: hue
+  template:
+    metadata:
+      labels:
+        app: hue
+    spec:
+      containers:
+      - name: hue-finance
+        image: g1g1/hue-learn:0.3

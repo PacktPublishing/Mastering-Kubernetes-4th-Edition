@@ -1,0 +1,26 @@
+name: test-some-rule
+policies:
+  - ../disallow-some-services-policy.yaml # disallow names service-1 and service-2 and disallow namespace ns-1
+resources:
+  - test-service-ok.yaml
+  - test-service-bad-name.yaml       # name is service-1
+  - test-service-bad-namespace.yaml  # namespace is ns-1
+results:
+  - policy: disallow-some-services
+    rule: some-rule
+    resources:
+      - service-ok
+    result: skip
+  - policy: disallow-some-services
+    rule: some-rule
+    resources:
+      - service-1
+    kind: Service
+    result: fail
+  - policy: disallow-some-services
+    rule: some-rule
+    resources:
+      - service-in-ns-1
+    kind: Service
+    namespace: ns-1
+    result: fail

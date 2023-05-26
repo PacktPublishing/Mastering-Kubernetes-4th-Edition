@@ -1,0 +1,1 @@
+$ docker build . -t g1g1/hue-global-listener:1.0

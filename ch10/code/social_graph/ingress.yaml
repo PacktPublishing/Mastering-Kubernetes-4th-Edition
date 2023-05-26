@@ -1,0 +1,13 @@
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: social-graph-manager
+spec:
+  rules:
+    - host: k8s.cluster
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: social-graph-manager
+              servicePort: 9090

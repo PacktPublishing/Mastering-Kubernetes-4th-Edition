@@ -1,0 +1,26 @@
+apiVersion: kyverno.io/v1
+kind: ClusterPolicy
+metadata:
+  name: set-request-limit-ratio
+spec:
+  rules:
+    - name: set-request-limit-ratio
+      match:
+        any:
+          - resources:
+              kinds:
+                - Pod
+      preconditions:
+        - key: "{{ request.operation || 'BACKGROUND' }}"
+          operator: AnyIn
+          value:
+            - CREATE
+            - UPDATE
+      mutate:
+        patchesJson6902: |-
+          - path: "/spec/containers/resources/limits
+            op: Add
+            value: "{{ multiply('{{ request.object.spec.containers[0].resources.requests.cpu || \'0\' }}', '5') }}"
+          - path: "/spec/containers/resources/limits/memory"
+            op: Add
+            value: "{{ multiply('{{ request.object.spec.containers[0].resources.requests.memory || \'0\' }}', '5') }}"          

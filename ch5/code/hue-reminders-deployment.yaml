@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hue-reminders
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: hue
+      service: reminders
+  template:
+    metadata:
+      name: hue-reminders
+      labels:
+        app: hue
+        service: reminders
+    spec:
+      containers:
+      - name: hue-reminders
+        image: g1g1/hue-reminders:3.0
+        ports:
+        - containerPort: 80

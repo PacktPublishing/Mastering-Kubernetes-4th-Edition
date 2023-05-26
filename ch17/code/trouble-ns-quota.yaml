@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ResourceQuota
+metadata:
+  name: cpu-requests
+spec:
+  hard:
+    requests.cpu: "1"

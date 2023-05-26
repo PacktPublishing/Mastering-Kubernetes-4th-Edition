@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: hue-collect-proxy
+  labels:
+    tier: stats
+    app: hue-collect-proxy
+spec:
+  selector:
+    matchLabels:
+      tier: stats
+      app: hue-collect-proxy
+  template:
+    metadata:
+      labels:
+        tier: stats
+        app: hue-collect-proxy
+    spec:
+      hostPID: true
+      hostIPC: true
+      hostNetwork: true
+      containers:
+      - name: hue-collect-proxy
+        image: busybox
+

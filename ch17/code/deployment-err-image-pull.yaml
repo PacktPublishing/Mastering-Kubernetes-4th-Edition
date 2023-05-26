@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: bad-image-deployment
+  namespace: trouble
+  labels:
+    app: the-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: the-app
+  template:
+    metadata:
+      labels:
+        app: the-app
+    spec:
+      containers:
+        - name: no-such-image
+          image: no-such-image:6.6.6

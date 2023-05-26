@@ -1,0 +1,24 @@
+kind: Pod
+apiVersion: v1
+metadata:
+  name: just-a-shell
+  labels:
+    name: just-a-shell
+spec:
+  containers:
+    - name: a-shell
+      image: g1g1/py-kube:0.3
+      command: ["sleep", "10000"]
+      volumeMounts:
+        - mountPath: "/data"
+          name: pv
+    - name: another-shell
+      image: g1g1/py-kube:0.3
+      command: ["sleep", "10000"]
+      volumeMounts:
+        - mountPath: "/another-data"
+          name: pv
+  volumes:
+    - name: pv
+      persistentVolumeClaim:
+        claimName: dir-pvc

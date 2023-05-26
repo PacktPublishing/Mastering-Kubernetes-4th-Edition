@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: infinite-init
+  namespace: trouble
+  labels:
+    app: infinite-init
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: infinite-init
+  template:
+    metadata:
+      name: infinite-init
+      labels:
+        app: infinite-init
+    spec:
+      initContainers:
+        - name: pause
+          image: registry.k8s.io/pause:3.8
+      containers:
+        - name: pause
+          image: registry.k8s.io/pause:3.8
+

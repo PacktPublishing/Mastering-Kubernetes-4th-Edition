@@ -1,0 +1,21 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: cron-demo
+spec:
+  schedule: "*/1 * * * *"
+  jobTemplate:
+    spec:
+      template:
+        metadata:
+          labels:
+            cronjob-name: cron-demo
+        spec:
+          containers:
+            - name: cron-demo
+              image: g1g1/py-kube:0.3
+              args:
+                - python
+                - -c
+                - from datetime import datetime; print(f'[{datetime.now()}] CronJob demo here...remember to stretch')
+          restartPolicy: OnFailure

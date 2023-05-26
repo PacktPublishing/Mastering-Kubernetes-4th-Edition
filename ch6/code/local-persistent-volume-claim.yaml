@@ -1,0 +1,16 @@
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: local-storage-claim
+spec:
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: 8Gi
+  storageClassName: local-storage
+  selector:
+    matchLabels:
+      release: stable
+    matchExpressions:
+    - {key: capacity, operator: In, values: [8Gi, 10Gi]}

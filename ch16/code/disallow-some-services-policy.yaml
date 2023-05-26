@@ -1,0 +1,26 @@
+apiVersion: kyverno.io/v1
+kind: ClusterPolicy
+metadata:
+  name: disallow-some-services
+spec:
+  validationFailureAction: enforce
+  rules:
+    - name: some-rule
+      match:
+        any:
+          - resources:
+              kinds:
+                - Service
+              names:
+                - "service-1"
+                - "service-2"
+          - resources:
+              kinds:
+                - Service
+              namespaces:
+                - "ns-1"
+      validate:
+        message: >-
+         services named service-1 and service-2 and 
+         any service in namespace ns-1 are not allowed
+        deny: {}

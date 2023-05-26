@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: some-pod
+spec:
+  containers:
+    - name: some-container
+      image: g1g1/py-kube:latest
+      command:
+        - sleep
+        - "9999"

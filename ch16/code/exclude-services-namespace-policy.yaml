@@ -1,0 +1,25 @@
+apiVersion: kyverno.io/v1
+kind: ClusterPolicy
+metadata:
+  name: exclude-services-namespace
+spec:
+  validationFailureAction: enforce
+  rules:
+    - name: some-rule
+      match:
+        any:
+          - resources:
+              kinds:
+                - Service
+          - resources:
+              kinds:
+                - Service
+      exclude:
+        any:
+          - resources:
+              namespaces:
+                - "ns-1"
+      validate:
+        message: >-
+         services are not allowed, except in the ns-1 namespace
+        deny: {}

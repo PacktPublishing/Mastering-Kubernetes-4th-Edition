@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: hue-learner
+  labels:
+    tier: internal-service
+spec:
+  containers:
+  - name: hue-learner
+    image: g1g1/hue-learn:0.3
+    resources:
+      requests:
+        cpu: 200m
+        memory: 256Mi
+    env:
+    - name: DISCOVER_QUEUE
+      value: dns
+    - name: DISCOVER_STORE
+      value: dns

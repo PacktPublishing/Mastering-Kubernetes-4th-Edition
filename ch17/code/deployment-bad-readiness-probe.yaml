@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: bad-readiness-probe
+  namespace: trouble
+  labels:
+    app: bad-readiness-probe
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: bad-readiness-probe
+  template:
+    metadata:
+      name: bad-readiness-probe
+      labels:
+        app: bad-readiness-probe
+    spec:
+      containers:
+        - name: pause
+          image: registry.k8s.io/pause:3.8
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 80
+            failureThreshold: 3
+            periodSeconds: 10
+            initialDelaySeconds: 5
+            timeoutSeconds: 2

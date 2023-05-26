@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: bad-startup-probe
+  namespace: trouble
+  labels:
+    app: bad-startup-probe
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: bad-startup-probe
+  template:
+    metadata:
+      name: bad-startup-probe
+      labels:
+        app: bad-startup-probe
+    spec:
+      containers:
+        - name: pause
+          image: registry.k8s.io/pause:3.8
+          startupProbe:
+            httpGet:
+              path: /
+              port: 80
+            failureThreshold: 3
+            periodSeconds: 10
+            initialDelaySeconds: 5
+            timeoutSeconds: 2

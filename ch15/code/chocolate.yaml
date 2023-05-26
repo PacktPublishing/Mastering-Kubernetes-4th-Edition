@@ -1,0 +1,7 @@
+apiVersion: awesome.corp.com/v1
+kind: Candy
+metadata:
+  name: chocolate
+spec:
+  flavor: sweeeeeeet
+

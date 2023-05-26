@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: run-container-error
+  namespace: trouble
+spec:
+  containers:
+    - name: run-container-error
+      image: bash
+      command:
+        - exit
+        - "1"

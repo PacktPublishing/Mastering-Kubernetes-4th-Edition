@@ -1,0 +1,17 @@
+# #!/usr/bin/env python3
+import sh
+
+
+def main():
+    """ """
+    o = "-o custom-columns='NAME:.metadata.name,DEPLOYMENT:.metadata.ownerReferences[0].name,REPLICAS:.spec.replicas"
+    all_rs = sh.kubectl.get.rs(o.split()).stdout.decode('utf-8').split('\n')
+    all_rs = [r.split() for r in all_rs if r]
+    results = ((name, deployment) for (name, deployment, replicas) in all_rs[1:] if replicas == '0')
+
+    for name, deployment in results:
+        print(name, deployment)
+
+
+if __name__ == '__main__':
+    main()

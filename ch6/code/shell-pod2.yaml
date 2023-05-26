@@ -1,0 +1,14 @@
+kind: Pod
+apiVersion: v1
+metadata:
+  name: just-a-shell
+  labels:
+    name: just-a-shell
+spec:
+  containers:
+  - name: a-shell
+    image: g1g1/py-kube:0.2
+    command: ["/bin/bash", "-c", "while true ; do sleep 10 ; done"]
+  - name: another-shell
+    image: g1g1/py-kube:0.2
+    command: ["/bin/bash", "-c", "while true ; do sleep 10 ; done"]

@@ -1,0 +1,11 @@
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: dir-pvc
+spec:
+  storageClassName: dir
+  accessModes:
+  - ReadWriteMany
+  resources:
+    requests:
+      storage: 1Gi

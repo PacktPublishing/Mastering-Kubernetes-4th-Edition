@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: cool-pod
+  namespace: the-namespace
+spec:
+  containers:
+  - name: cool-container
+    image: cool/app:v1
+  imagePullSecrets:
+  - name: the-registry-secret

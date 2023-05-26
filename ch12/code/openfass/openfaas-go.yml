@@ -1,0 +1,10 @@
+version: 1.0
+provider:
+  name: openfaas
+  gateway: http://127.0.0.1:8080
+functions:
+  openfaas-go:
+    lang: golang-http
+    handler: ./openfaas-go
+    image: docker.io/g1g1/openfaas-go:latest
+

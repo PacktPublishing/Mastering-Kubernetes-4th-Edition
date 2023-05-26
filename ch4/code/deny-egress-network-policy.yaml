@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: policy
+metadata:
+  name: default-deny-egress
+spec:
+  order: 999
+  egress:
+  - action: deny
+    destination:
+      net: 1.2.3.4
+    source: {}
